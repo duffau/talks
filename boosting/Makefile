@@ -3,7 +3,7 @@
 REVEAL_VERSION = 4.6.1
 
 reveal_flags = --mathjax \
-		--highlight-style zenburn \
+		--syntax-highlighting zenburn \
 		--slide-level 3 \
 		-V revealjs-url=https://unpkg.com/reveal.js@$(REVEAL_VERSION) \
 		-V theme=black \
