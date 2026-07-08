@@ -8,16 +8,22 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.1/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.1/dist/reveal.css">
   <style>
     .reveal .sourceCode {  /* see #7635 */
       overflow: visible;
     }
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -32,7 +38,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -49,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.1/dist/theme/black.css" id="theme">
   <link rel="stylesheet" href="static/custom.css"/>
   <link rel="stylesheet" href="static/custom-elements.css"/>
 <!-- tikzjax -->
@@ -89,7 +94,6 @@ Fields</p>
 
 <section id="about-me" class="slide level3">
 <h3>About Me</h3>
-<div>
 <ul>
 <li class="fragment">Senior Machine Learning Scientist at Alipes
 <ul>
@@ -111,7 +115,6 @@ University</li>
 <li class="fragment">McKinsey as Data Scientist/ML Engineer</li>
 </ul></li>
 </ul>
-</div>
 </section>
 <section id="slides" class="slide level3">
 <h3>Slides</h3>
@@ -150,7 +153,6 @@ PER   O      O     ORG  ORG   O    O   O         LOC    LOC   EOS</code></pre>
 </section>
 <section id="challenges-for-ner" class="slide level3">
 <h3>Challenges for NER</h3>
-<div>
 <ul>
 <li class="fragment"><strong>Challenge 1</strong>: Named entity
 <strong>strings are rare</strong>
@@ -165,7 +167,6 @@ entity <strong>labels are dependent</strong>
 <li class="fragment">New York Times -&gt; <code>ORG</code></li>
 </ul></li>
 </ul>
-</div>
 </section>
 <section id="evolution-of-nlp-and-sequence-tagging"
 class="title-slide slide level2">
@@ -347,11 +348,9 @@ keys.”</li>
 <section id="what-is-a-conditional-random-field"
 class="title-slide slide level2">
 <h2>What is a Conditional Random Field?</h2>
-<div>
 <ul>
 <li class="fragment">Let’s have a look at a Hidden Markov Model 😅</li>
 </ul>
-</div>
 </section>
 <section id="hidden-markov-model" class="slide level3">
 <h3>Hidden Markov Model</h3>
@@ -458,14 +457,12 @@ alt="Linear Chain CRF" />
 </figure>
 </div>
 </div>
-<div>
 <ul>
 <li class="fragment"><em>Discriminative</em> as opposed to
 <em>Generative</em></li>
 <li class="fragment"><em>Richer</em> and <em>overlapping</em> word
 features</li>
 </ul>
-</div>
 <aside class="notes">
 <ul>
 <li>Relax the “tag generates word” assumption
@@ -512,7 +509,6 @@ vector at time <span class="math inline">\(t\)</span></li>
 </section>
 <section id="discriminative-vs-generative" class="slide level3">
 <h3>Discriminative VS Generative</h3>
-<div>
 <ul>
 <li class="fragment">Generative: <span class="math display">\[p(y,
 \mathbf{x}) = p(\mathbf{y} \vert \mathbf{x})p(\mathbf{x})\]</span>
@@ -527,7 +523,6 @@ is often difficult to model -&gt; Simplifying assumptions</li>
 class="math inline">\(p(\mathbf{x})\)</span></li>
 </ul></li>
 </ul>
-</div>
 <aside class="notes">
 <ul>
 <li>Generative:: Label vector y can probabilistically “generate” a
@@ -570,8 +565,8 @@ class="math inline">\(\mathbf{x}\)</span></li>
 <p><img data-src="static/model-relation.png" style="width:40.0%" /></p>
 <div class="footer">
 <p>Illustration: <span class="citation"
-data-cites="sutton2012introduction">Sutton, McCallum, et al.
-(2012)</span></p>
+data-cites="sutton2012introduction"><span class="nocase">Sutton et
+al.</span> (2012)</span></p>
 </div>
 </section>
 <section id="crf-from-hmms-cond.-distribution" class="slide level3">
@@ -627,7 +622,6 @@ p(\mathbf{y} | \mathbf{x}) = \frac{\prod_{t=1}^{T} \exp \left(
 \right)}{\sum_{\mathbf{y}^\prime} \prod_{t=1}^{T} \exp \left(
 \sum_{k=1}^K \theta_k f_k(y_t, y_{t-1}, x_t) \right)}
 \end{aligned}\]</span>
-<div>
 <ul>
 <li class="fragment">The above is a CRF factorization 🎉</li>
 <li class="fragment">But is restricted in two major ways:
@@ -637,7 +631,6 @@ p(\mathbf{y} | \mathbf{x}) = \frac{\prod_{t=1}^{T} \exp \left(
 class="math inline">\(x_t\)</span> enters the model</li>
 </ul></li>
 </ul>
-</div>
 </div>
 <div class="fragment">
 <p><strong>Take away</strong>: HMM’s are CRF’s but with (much) more
@@ -856,7 +849,6 @@ p\left(\mathbf{y}_t \mid \mathbf{x}_t ; \theta\right) + c_1 \lVert
 <div class="column" style="width:20%;">
 <p><img data-src="static/l1_l2_reg.svg" style="width:100.0%" /></p>
 </div><div class="column" style="width:80%;">
-<div>
 <ul>
 <li class="fragment">L2: Strictly Convex Optimization</li>
 <li class="fragment">Efficient use of Quasi-Newton Methods</li>
@@ -864,7 +856,6 @@ p\left(\mathbf{y}_t \mid \mathbf{x}_t ; \theta\right) + c_1 \lVert
 <li class="fragment">Hyperparameter opt. <span
 class="math inline">\((c_1,c_2)\)</span></li>
 </ul>
-</div>
 </div>
 </div>
 <aside class="notes">
@@ -897,8 +888,7 @@ list of engineered features</a></li>
 </ul>
 <div class="footer">
 <p>Source: <span class="citation"
-data-cites="keraghel2024survey">Keraghel, Morbieu, and Nadif
-(2024)</span></p>
+data-cites="keraghel2024survey">Keraghel et al. (2024)</span></p>
 </div>
 </section>
 <section id="dataset-level-performance" class="slide level3">
@@ -1013,8 +1003,7 @@ data-cites="keraghel2024survey">Keraghel, Morbieu, and Nadif
 </div>
 <div class="footer">
 <p>Source: <span class="citation"
-data-cites="keraghel2024survey">Keraghel, Morbieu, and Nadif
-(2024)</span></p>
+data-cites="keraghel2024survey">Keraghel et al. (2024)</span></p>
 </div>
 </section>
 <section id="performance-analysis" class="slide level3">
@@ -1166,7 +1155,6 @@ Fitted CRF</p>
 </section>
 <section id="conclusion" class="slide level3">
 <h3>Conclusion</h3>
-<div>
 <ul>
 <li class="fragment">CRFs are great at identifying entities which are
 <ul>
@@ -1182,7 +1170,6 @@ datasets</li>
 <li class="fragment">CRFs inference is <strong>fast</strong>, especially
 with C++ implementation</li>
 </ul>
-</div>
 </section>
 <section id="learn-more" class="slide level3">
 <h3>Learn more</h3>
@@ -1211,16 +1198,17 @@ Graphical Models</a></p>
 class="title-slide slide level2 allowframebreaks">
 <h2 class="allowframebreaks">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent"
-data-entry-spacing="0" role="list">
+role="list">
 <div id="ref-keraghel2024survey" class="csl-entry" role="listitem">
 Keraghel, Imed, Stanislas Morbieu, and Mohamed Nadif. 2024. <span>“A
 Survey on Recent Advances in Named Entity Recognition.”</span> <em>arXiv
 Preprint arXiv:2401.10825</em>.
 </div>
 <div id="ref-sutton2012introduction" class="csl-entry" role="listitem">
-Sutton, Charles, Andrew McCallum, et al. 2012. <span>“An Introduction to
-Conditional Random Fields.”</span> <em>Foundations and
-Trends<span></span> in Machine Learning</em> 4 (4): 267–373.
+<span class="nocase">Sutton, Charles, Andrew McCallum, et al.</span>
+2012. <span>“An Introduction to Conditional Random Fields.”</span>
+<em>Foundations and Trends<span>®</span> in Machine Learning</em> 4 (4):
+267–373.
 </div>
 <div id="ref-vaswani2017attention" class="csl-entry" role="listitem">
 Vaswani, A. 2017. <span>“Attention Is All You Need.”</span> <em>Advances
@@ -1232,14 +1220,14 @@ in Neural Information Processing Systems</em>.
     </div>
   </div>
 
-  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/dist/reveal.js"></script>
   
 
   <!-- reveal.js plugins -->
-  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
-  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
-  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
-  <script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/zoom/zoom.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/math/math.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.3.0/plugin/mermaid/mermaid.js"></script>
   <!-- Chart plugin -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
@@ -1391,7 +1379,7 @@ in Neural Information Processing Systems</em>.
         mobileViewDistance: 2,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

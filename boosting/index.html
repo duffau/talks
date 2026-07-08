@@ -8,16 +8,22 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.1/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.1/dist/reveal.css">
   <style>
     .reveal .sourceCode {  /* see #7635 */
       overflow: visible;
     }
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -32,7 +38,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -49,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.1/dist/theme/black.css" id="theme">
   <link rel="stylesheet" href="./black-root.css"/>
   <meta property="og:url" content="https://duffau.github.io/talks/boosting/pydata-cph/">
   <meta property="og:type" content="website">
@@ -96,8 +101,8 @@ style="height:20.0%" /></a></p>
 <p>A procedure to combine many <strong>weak</strong> learners to produce
 a powerful <strong>committee</strong>.</p>
 <p>Elements of Statistical Learning <span class="citation"
-data-cites="friedman2009elements">(J. Friedman et al. 2009, sec.
-10.1)</span></p>
+data-cites="friedman2009elements">(<span class="nocase">Friedman et
+al.</span> 2009, sec. 10.1)</span></p>
 </blockquote>
 <aside class="notes">
 <ul>
@@ -241,8 +246,8 @@ class="math inline">\(1/\delta\)</span></li>
 <p><img data-src="./timeline/boosting_timeline.svg" width="1200" /></p>
 </div><div class="column" style="width:33%;">
 <p><img data-src="./static/robert-schapire.jpg" height="130" /></p>
-<p><span class="citation" data-cites="schapire1990strength">(R. E.
-Schapire 1990)</span></p>
+<p><span class="citation" data-cites="schapire1990strength">(Schapire
+1990)</span></p>
 <ul>
 <li>Cracks the <em>Hypothesis boosting problem</em></li>
 <li>Shows <em>weak learner</em> &lt;=&gt; <em>strong learner</em></li>
@@ -292,7 +297,7 @@ time</li>
 </div><div class="column" style="width:33%;">
 <p><img data-src="./static/yoav-freund.png" height="130" /> <img
 data-src="./static/robert-schapire.jpg" height="130" /></p>
-<p><span class="citation" data-cites="schapire1995decision">(R. Schapire
+<p><span class="citation" data-cites="schapire1995decision">(Schapire
 and Freund 1995)</span></p>
 <ul>
 <li>Introduces AdaBoost</li>
@@ -328,8 +333,8 @@ scheme</li>
 <p><img data-src="./static/jerome-h-friedman.jpeg" height="130" /> <img
 data-src="./static/robert-tibshirani-trevor-hastie.jpg"
 height="130" /></p>
-<p><span class="citation" data-cites="friedman2000special">(J. Friedman,
-Hastie, and Tibshirani 2000)</span></p>
+<p><span class="citation" data-cites="friedman2000special">(Friedman et
+al. 2000)</span></p>
 <ul>
 <li>Shows AdaBoost is <em>Stagewise Additive Logistic
 regression</em></li>
@@ -355,8 +360,8 @@ University - 44 years at the time</li>
 <p><img data-src="./timeline/boosting_timeline.svg" width="1200" /></p>
 </div><div class="column" style="width:33%;">
 <p><img data-src="./static/jerome-h-friedman.jpeg" height="130" /></p>
-<p><span class="citation" data-cites="friedman2001greedy">(J. H.
-Friedman 2001)</span> <span class="citation"
+<p><span class="citation" data-cites="friedman2001greedy">(Friedman
+2001)</span> <span class="citation"
 data-cites="mason1999boosting">(Mason et al. 1999)</span></p>
 <ul>
 <li>Generalizes the <em>boosting</em> concept</li>
@@ -595,9 +600,9 @@ I(y_i \neq G_m(x_i)))\)</span></li>
 <ul>
 <li>Not originally motivated in <em>Forward Stagewise Additive
 Learning</em></li>
-<li><span class="citation" data-cites="friedman2000special">(J.
-Friedman, Hastie, and Tibshirani 2000)</span> show that Adaboost is a
-stagewise additive model with loss <span class="math display">\[
+<li><span class="citation" data-cites="friedman2000special">(Friedman et
+al. 2000)</span> show that Adaboost is a stagewise additive model with
+loss <span class="math display">\[
 L(y, f (x)) = \exp(−y f(x))
 \]</span> where <span class="math inline">\(y\in \{-1, 1\}\)</span> and
 <span class="math inline">\(f(x) = \sum_{m=1}^M \alpha_m G_m(x)\)</span>
@@ -650,11 +655,9 @@ cross-entropy</figcaption>
 
 <section id="adaboost-1" class="title-slide slide level2">
 <h2>Adaboost</h2>
-<div>
 <ul>
 <li>10D nested spheres with noisy data</li>
 </ul>
-</div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <figure>
@@ -709,7 +712,6 @@ alt="Test error noisy data" />
 </ul>
 <div class="fragment">
 <blockquote>
-<div>
 <ol type="1">
 <li>Initialize weights <span class="math inline">\(w_i=1/N\)</span></li>
 <li>For <span class="math inline">\(m=1\)</span> to <span
@@ -727,7 +729,6 @@ I(y_i \neq G_m(x_i)))\)</span></li>
 <li>Output <span class="math display">\[G(x) =
 \text{sign}\left(\sum_{m=1}^M \alpha_m G_m(x)\right)\]</span></li>
 </ol>
-</div>
 </blockquote>
 </div>
 <div class="fragment">
@@ -737,17 +738,15 @@ I(y_i \neq G_m(x_i)))\)</span></li>
 
 <section id="break" class="title-slide slide level2">
 <h2>Break</h2>
-<div>
 <p>5 minutes 🍕🍺</p>
-</div>
 </section>
 
 <section id="gradient-boosting" class="title-slide slide level2">
 <h2>Gradient boosting</h2>
 <ul>
 <li>Introduced by <span class="citation"
-data-cites="friedman2001greedy">(J. H. Friedman 2001)</span> as a new
-view of boosting</li>
+data-cites="friedman2001greedy">(Friedman 2001)</span> as a new view of
+boosting</li>
 <li>Makes it possible to <em>derive</em> a boosting procedure</li>
 <li>Solves each forward stagewise step as <em>gradient descent</em> in a
 function space</li>
@@ -917,7 +916,7 @@ minimizing the loss</li>
 <h2>Gradient boosting</h2>
 <ul>
 <li>The idea of <span class="citation"
-data-cites="friedman2001greedy">(J. H. Friedman 2001)</span>:
+data-cites="friedman2001greedy">(Friedman 2001)</span>:
 <ul>
 <li>Fit a <em>learner</em> to <span
 class="math inline">\(-\mathbf{g}_m\)</span> <span
@@ -992,21 +991,21 @@ data-src="././static/trevor-hastie-gradient-boosting-thumbnail.jpg" /></p>
 class="title-slide slide level2 allowframebreaks">
 <h2 class="allowframebreaks">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent"
-data-entry-spacing="0" role="list">
+role="list">
 <div id="ref-chen2015higgs" class="csl-entry" role="listitem">
 Chen, Tianqi, and Tong He. 2015. <span>“Higgs Boson Discovery with
-Boosted Trees.”</span> In <em>NIPS 2014 Workshop on High-Energy Physics
-and Machine Learning</em>, 69–80. PMLR.
+Boosted Trees.”</span> <em>NIPS 2014 Workshop on High-Energy Physics and
+Machine Learning</em>, 69–80.
 </div>
 <div id="ref-freund1990majority" class="csl-entry" role="listitem">
 Freund, Yoav. 1990. <span>“Boosting a Weak Learning Algorithm by
-Majority.”</span> In <em>Proceedings of the Third Annual Workshop on
+Majority.”</span> <em>Proceedings of the Third Annual Workshop on
 Computational Learning Theory, 1990</em>.
 </div>
 <div id="ref-friedman2001greedy" class="csl-entry" role="listitem">
 Friedman, Jerome H. 2001. <span>“Greedy Function Approximation: A
 Gradient Boosting Machine.”</span> <em>Annals of Statistics</em>,
-1189–1232.
+1189–232.
 </div>
 <div id="ref-friedman2000special" class="csl-entry" role="listitem">
 Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. 2000.
@@ -1015,24 +1014,25 @@ Statistical View of Boosting.”</span> <em>Annals of Statistics</em>,
 337–74.
 </div>
 <div id="ref-friedman2009elements" class="csl-entry" role="listitem">
-Friedman, Jerome, Trevor Hastie, Robert Tibshirani, et al. 2009. <em>The
-Elements of Statistical Learning</em>. 2nd ed. New York, NY: Springer.
+<span class="nocase">Friedman, Jerome, Trevor Hastie, Robert Tibshirani,
+et al.</span> 2009. <em>The Elements of Statistical Learning</em>. 2nd
+ed. Springer.
 </div>
 <div id="ref-kearns1989crytographic" class="csl-entry" role="listitem">
 Kearns, M, and LG Valiant. 1989. <span>“Crytographic Limitations on
-Learning Boolean Formulae and Finite Automata.”</span> In
-<em>Proceedings of the Twenty-First Annual ACM Symposium on Theory of
-Computing</em>, 433–44.
+Learning Boolean Formulae and Finite Automata.”</span> <em>Proceedings
+of the Twenty-First Annual ACM Symposium on Theory of Computing</em>,
+433–44.
 </div>
 <div id="ref-mason1999boosting" class="csl-entry" role="listitem">
 Mason, Llew, Jonathan Baxter, Peter Bartlett, and Marcus Frean. 1999.
 <span>“Boosting Algorithms as Gradient Descent in Function
-Space.”</span> In <em>Proc. NIPS</em>, 12:512–18.
+Space.”</span> <em>Proc. NIPS</em> 12: 512–18.
 </div>
 <div id="ref-schapire1995decision" class="csl-entry" role="listitem">
 Schapire, R, and Y Freund. 1995. <span>“A Decision-Theoretic
 Generalization of on-Line Learning and an Application to
-Boosting.”</span> In <em>Second European Conference on Computational
+Boosting.”</span> <em>Second European Conference on Computational
 Learning Theory</em>, 23–37.
 </div>
 <div id="ref-schapire1990strength" class="csl-entry" role="listitem">
@@ -1048,13 +1048,13 @@ Valiant, Leslie G. 1984. <span>“A Theory of the Learnable.”</span>
     </div>
   </div>
 
-  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/dist/reveal.js"></script>
 
   <!-- reveal.js plugins -->
-  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
-  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
-  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
-  <script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/zoom/zoom.js"></script>
+  <script src="https://unpkg.com/reveal.js@4.6.1/plugin/math/math.js"></script>
 
   <script>
 
@@ -1202,7 +1202,7 @@ Valiant, Leslie G. 1984. <span>“A Theory of the Learnable.”</span>
         mobileViewDistance: 2,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
