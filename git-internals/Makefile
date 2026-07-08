@@ -6,7 +6,7 @@ slides.html:
 		-t revealjs \
 		-s presentation/slides.md \
 		-o .slides.html \
-		--highlight-style zenburn \
+        --syntax-highlighting zenburn \
 		-V revealjs-url=https://unpkg.com/reveal.js@^4/ \
 		-V theme=black \
 		--css black-root.css \
