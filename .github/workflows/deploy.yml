@@ -1,14 +1,20 @@
 name: Build and Deploy
+
 on: [push]
+
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v4
 
       - name: Cache pandoc built filters
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-pandoc-cabal
         with:
@@ -36,14 +42,13 @@ jobs:
           for fp in $(find . -name install-deps.sh); do $fp; done
           echo "$HOME/.cabal/bin" >> $GITHUB_PATH
 
-      - name: Build slides 
+      - name: Build slides
         run: |
           make slides.html
           for fp in $(find . -name .slides.html); do mv ${fp} ${fp%.slides.html}index.html ; done
 
-
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages # The branch the action should deploy to.
+          branch: gh-pages
           folder: .
